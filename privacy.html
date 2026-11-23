@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="color-scheme" content="light dark">
+<script>/* Chrome Auto Dark Mode: if the browser force-darkens a light page, switch to our own dark theme */(function(){try{var r=document.documentElement,d=document.createElement("div");d.style.cssText="display:none;color-scheme:light;background-color:canvas";r.appendChild(d);var c=getComputedStyle(d).backgroundColor;r.removeChild(d);if(c&&c!=="rgb(255, 255, 255)"){r.setAttribute("data-forced-dark","");if(!r.hasAttribute("data-theme"))r.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Privacy | Cairn Advisory</title>
 <meta name="description" content="How the Cairn Advisory website handles the information you send through the contact form.">
@@ -155,6 +157,9 @@ h2{
   background:var(--text);color:var(--bg);border:0;border-radius:0;text-decoration:none;cursor:pointer;
 }
 .btn:hover{background:var(--accent);color:#202B33}
+/* Chrome Auto Dark Mode repaints light fills and borders dark; draw the button outline as an image there instead */
+:root[data-forced-dark] .btn{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='none' stroke='%23ECEFEE' stroke-width='3'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;color:#ECEFEE}
+:root[data-forced-dark] .btn:hover{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='none' stroke='%23C0873C' stroke-width='3'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;color:#E0B070}
 .hero-trail{display:none}
 @media (min-width:900px){
   .hero{padding-block:96px 72px}
