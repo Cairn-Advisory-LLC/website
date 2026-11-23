@@ -303,6 +303,11 @@ form .row{display:grid;grid-template-columns:1fr;gap:0 32px}
 .form-foot small{color:var(--text-2);font-size:14px}
 .form-note{margin-top:16px;font-size:15px}
 .form-note[hidden]{display:none}
+.form-note.ok{color:var(--text);font-weight:600}
+.form-note.err{color:var(--text)}
+.form-note.err a{color:inherit}
+.btn[disabled]{opacity:.6;cursor:wait}
+.hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 
 /* Footer */
 .site-footer{padding-block:32px 40px;border-top:1px solid var(--rule)}
@@ -538,12 +543,14 @@ form .row{display:grid;grid-template-columns:1fr;gap:0 32px}
         </ol>
       </div>
 
-      <form id="contact-form" novalidate aria-describedby="form-draft">
+      <form id="contact-form" action="https://formspree.io/f/moedpnaw" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New message from cairnadv.com">
+        <div class="hp" aria-hidden="true"><label for="f-gotcha">Leave this field empty</label><input id="f-gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
         <div class="row">
           <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name"></div>
-          <div class="field"><label for="f-org">Court or agency</label><input id="f-org" name="org" type="text" autocomplete="organization"></div>
+          <div class="field"><label for="f-org">Court or agency</label><input id="f-org" name="organization" type="text" autocomplete="organization"></div>
         </div>
-        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="f-email">Email (required)</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
         <div class="field">
           <label for="f-topic">What can we help with?</label>
           <select id="f-topic" name="topic">
@@ -558,12 +565,11 @@ form .row{display:grid;grid-template-columns:1fr;gap:0 32px}
             <option value="other">Something else</option>
           </select>
         </div>
-        <div class="field"><label for="f-msg">What are you working on?</label><textarea id="f-msg" name="message"></textarea></div>
+        <div class="field"><label for="f-msg">What are you working on? (required)</label><textarea id="f-msg" name="message" required></textarea></div>
         <div class="form-foot">
           <button class="btn" type="submit">Send message</button>
-          <small id="form-draft">Draft form. It does not send yet.</small>
         </div>
-        <p class="form-note" id="form-note" role="status" hidden><span class="ph">This is a draft form and nothing was sent. Please email us at info@cairnadv.com. [Patrick to confirm: where form messages should go]</span></p>
+        <p class="form-note" id="form-note" role="status" aria-live="polite" hidden></p>
       </form>
     </div>
   </div>
@@ -593,7 +599,24 @@ form .row{display:grid;grid-template-columns:1fr;gap:0 32px}
   var form=document.getElementById('contact-form');
   var note=document.getElementById('form-note');
   var topic=document.getElementById('f-topic');
-  if(form){form.addEventListener('submit',function(e){e.preventDefault();if(note){note.hidden=false;}});}
+  function say(cls,html){if(note){note.className='form-note '+cls;note.innerHTML=html;note.hidden=false;}}
+  if(form){form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=form.elements['email'],msg=form.elements['message'],btn=form.querySelector('button[type=submit]');
+    var bad=null;
+    if(!email.value.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())){bad=email;}
+    else if(!msg.value.trim()){bad=msg;}
+    [email,msg].forEach(function(f){f.removeAttribute('aria-invalid');});
+    if(bad){bad.setAttribute('aria-invalid','true');say('err',bad===email?'Please enter a valid email address.':'Please tell us a little about what you are working on.');bad.focus();return;}
+    var data=new FormData(form);
+    if(topic&&topic.value){data.set('topic',topic.options[topic.selectedIndex].text);}
+    var label=btn.textContent;btn.disabled=true;btn.textContent='Sending...';if(note){note.hidden=true;}
+    fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
+      .then(function(r){if(!r.ok){throw new Error('HTTP '+r.status);}
+        form.reset();say('ok','Thanks, your message is on its way.');})
+      .catch(function(){say('err','Something went wrong. Please email <a href="mailto:info@cairnadv.com">info@cairnadv.com</a>.');})
+      .then(function(){btn.disabled=false;btn.textContent=label;});
+  });}
   document.querySelectorAll('[data-topic]').forEach(function(a){
     a.addEventListener('click',function(){if(topic){topic.value=a.getAttribute('data-topic');}});
   });
