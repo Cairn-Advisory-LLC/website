@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="color-scheme" content="light dark">
+<script>/* Chrome Auto Dark Mode: if the browser force-darkens a light page, switch to our own dark theme */(function(){try{var r=document.documentElement,d=document.createElement("div");d.style.cssText="display:none;color-scheme:light;background-color:canvas";r.appendChild(d);var c=getComputedStyle(d).backgroundColor;r.removeChild(d);if(c&&c!=="rgb(255, 255, 255)"){r.setAttribute("data-forced-dark","");if(!r.hasAttribute("data-theme"))r.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Cairn Advisory | Professional services for courts and justice agencies</title>
 <meta name="description" content="Cairn Advisory is an independent, vendor-neutral professional services firm for courts and justice agencies: assessments, procurement support, project management, implementation, integrations and ongoing support.">
@@ -165,6 +167,9 @@ h2{
   background:var(--text);color:var(--bg);border:0;border-radius:0;text-decoration:none;cursor:pointer;
 }
 .btn:hover{background:var(--accent);color:#202B33}
+/* Chrome Auto Dark Mode repaints light fills and borders dark; draw the button outline as an image there instead */
+:root[data-forced-dark] .btn{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='none' stroke='%23ECEFEE' stroke-width='3'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;color:#ECEFEE}
+:root[data-forced-dark] .btn:hover{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='none' stroke='%23C0873C' stroke-width='3'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;color:#E0B070}
 .hero-trail{display:none}
 @media (min-width:900px){
   .hero{padding-block:96px 72px}
@@ -368,11 +373,8 @@ form .row{display:grid;grid-template-columns:1fr;gap:0 32px}
       </div>
     </div>
     <svg class="hero-trail" viewBox="0 0 300 480" role="img" aria-label="A trail of four cairns winding uphill">
-      <path class="trail-path" d="M20,470 C40,440 60,430 90,420 C160,400 230,370 210,320 C190,270 70,260 90,210 C110,160 230,150 200,100 C185,75 160,50 170,12"/>
-      <circle class="mask" cx="90" cy="420" r="30"/>
-      <circle class="mask" cx="210" cy="320" r="26"/>
-      <circle class="mask" cx="90" cy="210" r="22"/>
-      <circle class="mask" cx="200" cy="100" r="18"/>
+      <clipPath id="trail-gaps" clipPathUnits="userSpaceOnUse"><path clip-rule="evenodd" d="M0,0H300V480H0ZM60,420a30,30 0 1,0 60,0a30,30 0 1,0 -60,0ZM184,320a26,26 0 1,0 52,0a26,26 0 1,0 -52,0ZM68,210a22,22 0 1,0 44,0a22,22 0 1,0 -44,0ZM182,100a18,18 0 1,0 36,0a18,18 0 1,0 -36,0Z"/></clipPath>
+      <path class="trail-path" clip-path="url(#trail-gaps)" d="M20,470 C40,440 60,430 90,420 C160,400 230,370 210,320 C190,270 70,260 90,210 C110,160 230,150 200,100 C185,75 160,50 170,12"/>
       <use href="#cairn" x="73.2" y="396" width="33.6" height="48"/>
       <use href="#cairn" x="195.3" y="299" width="29.4" height="42"/>
       <use href="#cairn" x="77.4" y="192" width="25.2" height="36"/>
