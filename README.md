@@ -1,2 +1,3 @@
-# website
-Cairn Advisory website (cairnadv.com)
+# Cairn Advisory website
+
+Source for cairnadv.com, served by GitHub Pages.
