@@ -33,7 +33,7 @@
   --btn-text:#F4F5F3;
   --btn-hover-bg:#C0873C;
   --btn-hover-text:#202B33;
-  --font-display:"Fraunces", Georgia, "Times New Roman", serif;
+  --font-display:"Source Serif 4", Georgia, "Times New Roman", serif;
   --font-body:"Archivo", "Helvetica Neue", Arial, system-ui, sans-serif;
   --maxw:1160px;
   --gl:max(16px, env(safe-area-inset-left,0px));
@@ -95,7 +95,7 @@
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media (prefers-reduced-motion: no-preference){html{scroll-behavior:smooth}}
-body{font-variation-settings:"WONK" 0;
+body{
   margin:0;background:var(--bg);color:var(--text);
   font-family:var(--font-body);font-size:17px;line-height:1.6;
   overflow-x:hidden;
@@ -105,7 +105,7 @@ a{color:inherit;text-decoration-color:var(--accent);text-decoration-thickness:1p
 a:hover{text-decoration-thickness:2px}
 :focus-visible{outline:2px solid var(--focus);outline-offset:3px}
 p{margin:0 0 1em}
-h1,h2,h3,h4{margin:0;font-weight:500}
+h1,h2,h3,h4{margin:0;font-weight:600}
 h2{text-wrap:balance}
 .wrap{max-width:calc(var(--maxw) + 80px);margin:0 auto;padding-left:var(--gl);padding-right:var(--gr)}
 @media (min-width:760px){.wrap{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}}
@@ -124,7 +124,7 @@ h1,h2,h3,h4{overflow-wrap:break-word}
   .split{grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:48px}
 }
 h2{
-  font-family:var(--font-display);font-weight:500;
+  font-family:var(--font-display);font-weight:600;
   font-size:clamp(32px,4.2vw,48px);line-height:1.08;letter-spacing:-.01em;word-spacing:.04em;
 }
 .intro{font-size:19px;line-height:1.55;max-width:56ch;margin:0}
@@ -163,9 +163,8 @@ h2{
 .hero{padding-block:56px 48px}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;position:relative}
 .hero h1{
-  font-family:var(--font-display);font-weight:500;
-  font-size:clamp(58px,11vw,132px);line-height:.95;letter-spacing:-.025em;word-spacing:.05em;
-  font-variation-settings:"opsz" 144, "WONK" 0;
+  font-family:var(--font-display);font-weight:600;
+  font-size:clamp(56px,10.5vw,124px);line-height:1;letter-spacing:-.02em;word-spacing:.04em;
   margin:0 0 32px;
 }
 .hero h1 em{font-style:italic;font-weight:400}
@@ -202,7 +201,7 @@ h2{
   padding:18px 0;border-top:1px solid var(--rule);
   text-decoration:none;color:var(--text);
 }
-.spot .say{font-family:var(--font-display);font-size:22px;line-height:1.25;font-variation-settings:"opsz" 36, "WONK" 0}
+.spot .say{font-family:var(--font-display);font-size:22px;line-height:1.25}
 .spot .go{font-size:15px;color:var(--text-2)}
 .spot .go::after{content:" \2192";content:" \2192" / "";color:var(--accent-text)}
 .spot:hover .say{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:1px;text-underline-offset:5px}
@@ -219,14 +218,14 @@ h2{
 .stage-name{display:flex;gap:14px;align-items:flex-start}
 .stage-name img{width:20px;height:auto;margin-top:6px;flex:0 0 auto}
 .stage-name > div{min-width:0}
-.stage-name h3{font-family:var(--font-display);font-size:28px;line-height:1.15;font-weight:500}
+.stage-name h3{font-family:var(--font-display);font-size:28px;line-height:1.15;font-weight:600}
 .stage-name p{margin:6px 0 0;color:var(--text-2);font-size:16px;font-style:italic;font-family:var(--font-display)}
 @media (min-width:900px){.stage-name{position:sticky;top:96px}}
 .svc-list{list-style:none;margin:0;padding:0;counter-reset:none}
 .svc{display:grid;grid-template-columns:2.2em minmax(0,1fr);gap:0 8px;padding:0 0 36px}
 .svc + .svc{padding-top:32px;border-top:1px solid var(--rule)}
 .svc .num{font-family:var(--font-display);font-size:17px;color:var(--accent-text);padding-top:6px;font-variant-numeric:oldstyle-nums}
-.svc h4{font-family:var(--font-display);font-size:clamp(24px,2.6vw,30px);line-height:1.15;font-weight:500;margin-bottom:6px}
+.svc h4{font-family:var(--font-display);font-size:clamp(24px,2.6vw,30px);line-height:1.15;font-weight:600;margin-bottom:6px}
 .svc .prob{font-weight:600;margin:0 0 10px}
 .svc p{max-width:60ch}
 .svc ul{list-style:disc;margin:0 0 16px;padding-left:1.1em;color:var(--text-2);font-size:16px}
@@ -245,7 +244,7 @@ h2{
   .svc .body .more{grid-column:1;grid-row:4;align-self:start;justify-self:start}
 }
 .other{margin-top:72px;padding-top:28px;border-top:1px solid var(--rule)}
-.other h3{font-family:var(--font-display);font-size:28px;font-weight:500;line-height:1.15}
+.other h3{font-family:var(--font-display);font-size:28px;font-weight:600;line-height:1.15}
 .other p{max-width:56ch}
 
 /* How we work: the one inverted spread */
@@ -276,7 +275,7 @@ h2{
   color:var(--ph-text);font-size:13px;font-weight:600;line-height:1.35;
 }
 @media (min-width:760px){.portrait{max-width:240px}}
-.person h3{font-family:var(--font-display);font-size:32px;line-height:1.1;font-weight:500}
+.person h3{font-family:var(--font-display);font-size:32px;line-height:1.1;font-weight:600}
 .person .role{color:var(--text-2);font-size:15px;margin:6px 0 18px}
 .person p{max-width:58ch}
 .focus{font-size:16px;color:var(--text-2);border-top:1px solid var(--rule);padding-top:14px;margin-top:4px}
@@ -285,12 +284,11 @@ h2{
 .name-story{margin-top:72px;padding-top:40px;border-top:1px solid var(--rule)}
 .name-story .split{align-items:start}
 .intro p:last-child{margin-bottom:0}
-.name-story h3{font-family:var(--font-display);font-size:clamp(24px,3vw,30px);font-weight:500;line-height:1.2;display:flex;gap:12px;align-items:center;margin:0}
+.name-story h3{font-family:var(--font-display);font-size:clamp(24px,3vw,30px);font-weight:600;line-height:1.2;display:flex;gap:12px;align-items:center;margin:0}
 .name-story h3 img{width:26px;height:auto}
 .name-story blockquote{
   margin:0;font-family:var(--font-display);font-weight:400;font-style:italic;
   font-size:clamp(22px,2.5vw,30px);line-height:1.38;max-width:34ch;
-  font-variation-settings:"opsz" 48, "WONK" 0;
 }
 
 /* Contact */
@@ -343,7 +341,7 @@ form .row{display:grid;grid-template-columns:1fr;gap:0 32px}
 .policy{padding-block:48px 72px}
 @media (min-width:760px){.policy{padding-block:72px 96px}}
 .policy-inner{max-width:68ch}
-.policy h1{font-family:var(--font-display);font-weight:500;font-size:clamp(38px,6vw,64px);line-height:1.05;letter-spacing:-.01em;margin:0 0 10px}
+.policy h1{font-family:var(--font-display);font-weight:600;font-size:clamp(38px,6vw,64px);line-height:1.05;letter-spacing:-.01em;margin:0 0 10px}
 .policy .eff{color:var(--text-2);font-size:15px;margin:0 0 28px}
 .policy h2{font-size:clamp(24px,3vw,30px);margin:36px 0 10px;padding-top:24px;border-top:1px solid var(--rule)}
 .policy p,.policy li{text-wrap:pretty;overflow-wrap:anywhere}
@@ -355,7 +353,7 @@ form .row{display:grid;grid-template-columns:1fr;gap:0 32px}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Fraunces:ital,opsz,wght,WONK@0,9..144,400..500,0..1;1,9..144,400,0..1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap">
 </head>
 <body>
 <a class="skip" href="#top">Skip to main content</a>
